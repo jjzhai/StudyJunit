@@ -1,19 +1,28 @@
 package prime;
 
+import java.util.Scanner;
+
 public class check4Prime {
 	static final int max = 1000;
 	static final int min = 0;
 	static int input = 0;
 	
 	public static void main(String [] args) {
+		
 		check4Prime check = new check4Prime();
-		try {
-			check.checkArgs(args);
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("Usage: check4Prime x");
-			System.out.println("         -- where 0<=x<=1000");
-			System.exit(1);
+		Scanner inScanner = new Scanner(System.in);
+		System.out.print("请输入0到100之间的数字：");
+		input=inScanner.nextInt();
+		inScanner.close();
+		
+		if(!check.checkInput(input)){
+			System.out.print("输入的不合法");
+		}else {
+			if(check.primeCheck(input)){
+				System.out.print("输入的是素数");
+			}else {
+				System.out.print("输入的不是素数");
+			}
 		}
 	}
 	
@@ -57,11 +66,19 @@ public class check4Prime {
 		}else {
 			Integer num =Integer.valueOf(args[0]);
 			input = num.intValue();
+			
 			if (input<0) {
 				throw new Exception();
 			}else if (input>max) {
 				throw new Exception();
 			}
 		}
+	}
+	
+	public boolean checkInput(int num) {
+		if(input<0 || input>max){
+			return false;
+		}
+		return true;
 	}
 }
